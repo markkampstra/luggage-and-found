@@ -1,0 +1,55 @@
+<%= form_for @luggage_tag, html: { class: 'form-horizontal' } do |f| %>
+  <%= render 'errors', object: @luggage_tag %>
+  <div class="form-group">
+    <%= f.label :origin, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :origin, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :destination, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :destination, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :start, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.date_field :start, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :end, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.date_field :end, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <% unless @luggage_tag.new_record? %>
+    <div class="form-group">
+      <%= f.label :lost_at, class: 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :lost_at, class: 'text_field form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :found_at, class: 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :found_at, class: 'text_field form-control' %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :ok_at, class: 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <%= f.text_field :ok_at, class: 'text_field form-control' %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= link_to t('.cancel', default: t("helpers.links.cancel")),
+                  luggage_tags_path, class: 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

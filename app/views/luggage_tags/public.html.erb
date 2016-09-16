@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h1 class="panel-title">Luggage tag: <%= @luggage_tag.uuid %></h1>
+      </div>
+      <div class="panel-body">
+        <div class="jubmotron text-center">
+          <div class="row">
+            <div class="col-md-12 text-center qr-small">
+              <%= @qrcode.as_html.html_safe %>
+            </div>
+            <h1>STATUS</h1>
+            <% if @luggage_tag.lost_at && !@luggage_tag.found_at && !@luggage_tag.ok_at %>
+              <span class="label label-danger">Reported missing on <%= @luggage_tag.lost_at.strftime '%d / %b / %Y at %H:%mi' %></span>
+              <%= button_to 'Report found', report_found_luggage_tag_path(@luggage_tag.uuid), class: 'btn btn-success', method: :get %>
+
+            <% elsif @luggage_tag.found_at && !@luggage_tag.ok_at %>
+              <span class="label label-warning">Found on <%= @luggage_tag.found_at.strftime '%d / %b / %Y at %H:%mi' %></span>
+              <% if current_user && @luggage_tag.user_id == current_user.id %>
+                <div class="row">
+                  <div class="col-md-12 text-center">
+                    <%= button_to 'Report OK', report_ok_luggage_tag_path(@luggage_tag), class: 'btn btn-success' %>
+                  </div>
+                </div>
+              <% end %>
+            <% elsif @luggage_tag.ok_at %>
+              <span class="label label-success">Reported OK <%= @luggage_tag.ok_at.strftime '%d / %b / %Y at %H:%mi' %></span>
+            <% else %>
+              <span class="label label-default">In progress</span>
+              <% if current_user && @luggage_tag.user_id == current_user.id %>
+                <div class="row">
+                  <div class="col-md-2 col-md-offset-4">
+                    <%= button_to 'Report missing', report_missing_luggage_tag_path(@luggage_tag), class: 'btn btn-danger' %>
+                  </div>
+                  <div class="col-md-2">
+                    <%= button_to 'Report OK', report_ok_luggage_tag_path(@luggage_tag), class: 'btn btn-success' %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"><b>Origin</b></div>
+          <div class="col-md-8"><%= @luggage_tag.origin%></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"><b>Destination</b></div>
+          <div class="col-md-8"><%= @luggage_tag.destination %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"><b>Start</b></div>
+          <div class="col-md-8"><%= l @luggage_tag.start, format: '%d / %b / %Y' %></div>
+        </div>
+        <div class="row">
+          <div class="col-md-4"><b>End</b></div>
+          <div class="col-md-8"><%= l @luggage_tag.end, format: '%d / %b / %Y' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

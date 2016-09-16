@@ -1,0 +1,21 @@
+<%= form_for @luggage_tag, url: report_found_luggage_tag_path, html: { class: 'form-horizontal' } do |f| %>
+  <%= render 'errors', object: @luggage_tag %>
+  <div class="form-group">
+    <%= f.label :found_by, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :found_by, class: 'text_field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :found_comment, class: 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_area :found_comment, class: 'text_field form-control', rows: 10 %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit 'Report found', class: 'btn btn-primary' %>
+    </div>
+  </div>
+<% end %>

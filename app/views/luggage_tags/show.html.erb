@@ -1,0 +1,46 @@
+<%- model_class = LuggageTag -%>
+<div class="page-header">
+  <h1><%=t '.title', default: model_class.model_name.human.titleize %></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12 text-center qr">
+    <%= link_to raw(@qrcode.as_html), qr_luggage_tag_url(@luggage_tag.uuid) %>
+  </div>
+</div>
+<div class="fieldset">
+  <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:uuid) %></dt>
+      <dd><pre class="prettyprint"><%= link_to @luggage_tag.uuid, public_luggage_tag_url(@luggage_tag.uuid) %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:origin) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.origin %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:destination) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.destination %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:start) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.start %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:end) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.end %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:lost_at) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.lost_at %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:found_at) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.found_at %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:ok_at) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.ok_at %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:found_by) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.found_by %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:found_comment) %></dt>
+      <dd><pre class="prettyprint"><%= @luggage_tag.found_comment %></pre></dd>
+  </dl>
+</div>
+
+<div class="form-group">
+  <%= link_to t('.back', default: t("helpers.links.back")),
+              luggage_tags_path, class: 'btn btn-default'  %>
+  <%= link_to t('.edit', default: t("helpers.links.edit")),
+              edit_luggage_tag_path(@luggage_tag), class: 'btn btn-default' %>
+  <%= link_to t('.destroy', default: t("helpers.links.destroy")),
+              luggage_tag_path(@luggage_tag),
+              method: 'delete',
+              data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) },
+              class: 'btn btn-danger' %>
+</div>

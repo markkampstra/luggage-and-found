@@ -1,0 +1,54 @@
+<%- model_class = LuggageTag -%>
+<div class="page-header">
+  <h1><%=t '.title', default: model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:uuid) %></th>
+      <th><%= model_class.human_attribute_name(:origin) %></th>
+      <th><%= model_class.human_attribute_name(:destination) %></th>
+      <th><%= model_class.human_attribute_name(:start) %></th>
+      <th><%= model_class.human_attribute_name(:end) %></th>
+      <th><%= model_class.human_attribute_name(:lost_at) %></th>
+      <th><%= model_class.human_attribute_name(:found_at) %></th>
+      <th><%= model_class.human_attribute_name(:ok_at) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', default: t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @luggage_tags.each do |luggage_tag| %>
+      <tr>
+        <td><%= luggage_tag.id %></td>
+          <td><%= luggage_tag.user_id %></td>
+          <td><%= luggage_tag.uuid %></td>
+          <td><%= luggage_tag.origin %></td>
+          <td><%= luggage_tag.destination %></td>
+          <td><%= luggage_tag.start %></td>
+          <td><%= luggage_tag.end %></td>
+          <td><%= luggage_tag.lost_at %></td>
+          <td><%= luggage_tag.found_at %></td>
+          <td><%= luggage_tag.ok_at %></td>
+        <td><%=l luggage_tag.created_at, format: :long %></td>
+        <td>
+          <%= link_to luggage_tag_path(luggage_tag), class: 'btn btn-xs', title: "#{ t('.show', default: t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+          <%- end -%>
+          <%= link_to edit_luggage_tag_path(luggage_tag), class: 'btn btn-xs', title: "#{ t('.edit', default: t('helpers.links.edit')) }" do %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to luggage_tag_path(luggage_tag), method: :delete, data: { confirm: t('.confirm', default: t("helpers.links.confirm", default: 'Are you sure?')) }, class: 'btn btn-xs', title: "#{ t('.destroy', default: t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', default: t("helpers.links.new")),
+            new_luggage_tag_path,
+            class: 'btn btn-primary' %>
